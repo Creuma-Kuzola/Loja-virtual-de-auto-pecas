@@ -1,21 +1,29 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Termo de uso do software</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet name="css/index.css"/>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="/compra/List" value="Show All Compra Items"/>
-        <br />
-        <h:link outcome="/conta/List" value="Show All Conta Items"/>
-        <br />
-        <h:link outcome="/pessoa/List" value="Show All Pessoa Items"/>
-        <br />
-        <h:link outcome="/tipoConta/List" value="Show All TipoConta Items"/>
+        <h:form>
+            <h1>Projecto de SDPII</h1><br/><br/>
+            Bem-vindo ao projecto de SDP2 (Sistemas Distribuidos e Paralelos 2) feito pela Creuma Matias,<br/>
+            estudante do 4º ano de Engenharia Informática na Universidade Católica de Angola. <br/><br/>
+
+            Este projecto tem o mero objectivo de ser acadêmico e sem pretensões de qualquer uso comercial,<br/>
+            aqui foi proposta a construção de um sistema de gerencimento de uma loja de automóveis. <br/><br/>
+
+            Este projecto foi orientado pelo <b> Professor Doutor Aires Veloso </b>.<br/>
+            <br/><br/>
+           
+            <p:commandButton value="Aceitar Termos e continuar" action="login?faces-redirect=true" />
+          
+        </h:form>
     </h:body>
 
 

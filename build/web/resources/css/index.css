@@ -1,0 +1,32 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 22, 2022, 2:26:07 AM
+    Author     : creuma
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: grid;
+    place-items: center;
+    height: 80vh;
+}
+
+#btn-aceitar{
+    background-color: #38B6FF;
+    border: none;
+    width: 1vw;
+    height: 2vh;
+}
+
+#btn-recusar{
+    background-color: #ff0000;
+}
