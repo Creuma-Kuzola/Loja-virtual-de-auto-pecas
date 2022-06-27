@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Conta.findAll", query = "SELECT c FROM Conta c"),
     @NamedQuery(name = "Conta.findByPkConta", query = "SELECT c FROM Conta c WHERE c.pkConta = :pkConta"),
-    @NamedQuery(name = "Conta.findByNomeUsuario", query = "SELECT c FROM Conta c WHERE c.nomeUsuario = :nomeUsuario"),
-    @NamedQuery(name = "Conta.findBySenhaUsuario", query = "SELECT c FROM Conta c WHERE c.senhaUsuario = :senhaUsuario")})
+    @NamedQuery(name = "Conta.findByUsername", query = "SELECT c FROM Conta c WHERE c.username = :username"),
+    @NamedQuery(name = "Conta.findByPassword", query = "SELECT c FROM Conta c WHERE c.password = :password")})
 public class Conta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,13 +47,13 @@ public class Conta implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
-    @Column(name = "nome_usuario", nullable = false, length = 2147483647)
-    private String nomeUsuario;
+    @Column(nullable = false, length = 2147483647)
+    private String username;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
-    @Column(name = "senha_usuario", nullable = false, length = 2147483647)
-    private String senhaUsuario;
+    @Column(nullable = false, length = 2147483647)
+    private String password;
     @OneToMany(mappedBy = "fkConta")
     private List<Compra> compraList;
     @JoinColumn(name = "fk_pessoa", referencedColumnName = "pk_pessoa")
@@ -70,10 +70,10 @@ public class Conta implements Serializable {
         this.pkConta = pkConta;
     }
 
-    public Conta(Integer pkConta, String nomeUsuario, String senhaUsuario) {
+    public Conta(Integer pkConta, String username, String password) {
         this.pkConta = pkConta;
-        this.nomeUsuario = nomeUsuario;
-        this.senhaUsuario = senhaUsuario;
+        this.username = username;
+        this.password = password;
     }
 
     public Integer getPkConta() {
@@ -84,20 +84,20 @@ public class Conta implements Serializable {
         this.pkConta = pkConta;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getSenhaUsuario() {
-        return senhaUsuario;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenhaUsuario(String senhaUsuario) {
-        this.senhaUsuario = senhaUsuario;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @XmlTransient

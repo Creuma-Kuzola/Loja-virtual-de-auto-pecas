@@ -14,16 +14,27 @@ and open the template in the editor.
     <h:head>
         <title>Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet name="css/login.css"/>
     </h:head>
     <h:body>
-        <h:form>
-            <h:outputLabel value="Nome"/>
-            <h:inputText /><br/>
-            
-            <h:outputLabel value="Palavra Passe" />
-            <h:inputSecret />
-            
-            <br/><p:commandButton value="Login" action="home?faces-redirect=true"/>
+        <br/><h1>Faça login</h1>
+        <br/><h:form styleClass="form-login">
+            <p:panelGrid columns="2" styleClass="login-panel-style" >
+                
+                <h:outputLabel value="Username"/>
+                <h:inputText value="#{loginBean.conta.username}"/>
+
+                <h:outputLabel value="Password" />
+                <h:inputSecret value="#{loginBean.conta.password}"  />
+
+                <p:commandButton value="Login" action="#{loginBean.login()}"/>
+
+            </p:panelGrid>
+
         </h:form>
+
+        <br/><p:outputLabel value="Ainda não tem uma conta?  " >
+            <h:link outcome="criar_conta.xhtml" value="Cadastre-se" />
+        </p:outputLabel> 
     </h:body>
 </html>

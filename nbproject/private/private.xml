@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/src/java/portfolio/LerPortfolio.java</file>
-            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/nbproject/build-impl.xml</file>
             <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/login.xhtml</file>
             <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/index.xhtml</file>
-            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/template.xhtml</file>
-            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/src/java/beans/AccoesBean.java</file>
+            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/resources/css/login.css</file>
+            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/criar_conta.xhtml</file>
         </group>
     </open-files>
 </project-private>
