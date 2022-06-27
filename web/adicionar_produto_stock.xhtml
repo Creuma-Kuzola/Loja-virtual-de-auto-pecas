@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+
+        <ui:composition template="./template.xhtml">
+
+
+            <br/><br/><br/><br/>
+            <ui:define name="content">
+
+                <p:panelGrid columns="2" >
+                    <p:outputLabel value="Produto"/>
+                    <p:panelGrid columns="5" >
+                        <p:selectOneMenu value="">
+                            <f:selectItems 
+                                value="#{adicionarProdutoStockBean.listaMarca}" 
+                                var="marca" 
+                                itemLabel="#{marca.designacao}" 
+                                itemValue="#{marca.pkPortfolio}"
+                                />
+                        </p:selectOneMenu>
+
+                        <p:selectOneMenu value="">
+                            <f:selectItems 
+                                value="#{adicionarProdutoStockBean.listaModelo}" 
+                                var="modelo" 
+                                itemLabel="#{modelo.designacao}" 
+                                itemValue="#{modelo.pkPortfolio}"
+                                />
+                        </p:selectOneMenu>
+
+                        <p:selectOneMenu value="">
+                            <f:selectItems 
+                                value="#{adicionarProdutoStockBean.listaCategoriaPeca}" 
+                                var="categoriaPeca" 
+                                itemLabel="#{categoriaPeca.designacao}" 
+                                itemValue="#{categoriaPeca.pkPortfolio}"
+                                />
+                        </p:selectOneMenu>
+
+                        <p:selectOneMenu value="">
+                            <f:selectItems 
+                                value="#{adicionarProdutoStockBean.listaPeca}" 
+                                var="peca" 
+                                itemLabel="#{peca.designacao}" 
+                                itemValue="#{peca.pkPortfolio}"
+                                />
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+
+                    <p:outputLabel value="Quantidade mínima" />
+                    <p:inputText value="#{adicionarProdutoStockBean.stock.quantidadeMinima}"/>
+
+                    <p:outputLabel value="Quantidade Máxima" />
+                    <p:inputText value="#{adicionarProdutoStockBean.stock.quantidadeMaxima}"/>
+
+                    <p:outputLabel value="Quantidade Actual" />
+                    <p:inputText  value="#{adicionarProdutoStockBean.stock.quantidadeActual}"/>
+
+                </p:panelGrid>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

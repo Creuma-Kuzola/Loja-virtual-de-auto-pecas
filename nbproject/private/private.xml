@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/src/java/ejbs/facades/PortfolioFacade.java</file>
             <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/login.xhtml</file>
-            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/index.xhtml</file>
-            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/resources/css/login.css</file>
-            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/criar_conta.xhtml</file>
+            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/adicionar_produto_stock.xhtml</file>
+            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/web/home.xhtml</file>
+            <file>file:/home/creuma/NetBeansProjects/Proj2_2022/src/java/beans/AdicionarProdutoStockBean.java</file>
         </group>
     </open-files>
 </project-private>

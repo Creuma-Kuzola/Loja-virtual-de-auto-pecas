@@ -6,9 +6,11 @@
 package ejbs.facades;
 
 import ejbs.entities.Portfolio;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,28 @@ public class PortfolioFacade extends AbstractFacade<Portfolio> {
     public PortfolioFacade() {
         super(Portfolio.class);
     }
+
+    public List<Portfolio> findAllMarcas() {
+
+        Query query = em.createQuery("SELECT p FROM Portfolio p WHERE p.fkPortfolioPai.pkPortfolio = NULL");
+
+        return query.getResultList();
+
+    }
+
+    public List<Portfolio> findAllModelos() {
+
+        Query query = em.createQuery("SELECT p FROM Portfolio p WHERE p.pkPortfolio LIKE '_._' ");
+        return query.getResultList();
+    }
+
+    public List<Portfolio> findAllCategoriaPecas() {
+        Query query = em.createQuery("SELECT p FROM Portfolio p WHERE p.pkPortfolio LIKE '_._._' ");
+        return query.getResultList();
+    }
     
+    public List<Portfolio> findAllPecas(){
+        Query query = em.createQuery("SELECT p FROM Portfolio p WHERE p.pkPortfolio LIKE '_._._._' ");
+        return query.getResultList();
+    }
 }

@@ -22,10 +22,10 @@ and open the template in the editor.
             <p:panelGrid columns="2" styleClass="login-panel-style" >
                 
                 <h:outputLabel value="Username"/>
-                <h:inputText value="#{loginBean.conta.username}"/>
+                <h:inputText required="true" value="#{loginBean.conta.username}"/>
 
                 <h:outputLabel value="Password" />
-                <h:inputSecret value="#{loginBean.conta.password}"  />
+                <h:inputSecret required="true" value="#{loginBean.conta.password}"  />
 
                 <p:commandButton value="Login" action="#{loginBean.login()}"/>
 

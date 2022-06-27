@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -12,15 +13,37 @@
     </h:head>
 
     <h:body>
+        <h:form>
 
-        <div id="top" class="top">
-            <ui:insert name="top">Top</ui:insert>
-        </div>
+            <div id="top" class="top">
+                <ui:insert name="top">
+                    <p:menubar>
+                        <p:menuitem value="Home" action="home?faces-redirect=true" />
+                        <p:submenu label="Conta" >
+                            <p:menuitem value="Nova" />
+                            <p:menuitem value="Editar" />
+                        </p:submenu>
+                        <p:submenu label="Montra" >
+                            <p:menuitem value="Nova" />
+                            <p:menuitem value="Editar" />
+                        </p:submenu>
+                        <p:submenu label="Stock" >
+                            <p:menuitem value="Adicionar" action="adicionar_produto_stock.xhtml?faces-redirect=true" />
+                            <p:menuitem value="Editar" action="editar_produto_stock.xhtml?faces-redirect=true"/>
+                        </p:submenu>
+                        <p:submenu label="Compra" >
+                            <p:menuitem value="Nova" />
+                            <p:menuitem value="Editar" />
+                        </p:submenu>
 
-        <div id="content" class="center_content">
-            <ui:insert name="content">Content</ui:insert>
-        </div>
+                    </p:menubar>
+                </ui:insert>
+            </div>
 
+            <div id="content" class="center_content">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </h:form>
     </h:body>
 
 </html>
