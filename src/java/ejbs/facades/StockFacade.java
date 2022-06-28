@@ -9,6 +9,7 @@ import ejbs.entities.Stock;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +29,7 @@ public class StockFacade extends AbstractFacade<Stock> {
     public StockFacade() {
         super(Stock.class);
     }
+    
+   
     
 }

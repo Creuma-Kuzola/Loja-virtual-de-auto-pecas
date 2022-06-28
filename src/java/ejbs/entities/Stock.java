@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,8 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Stock.findByPkStock", query = "SELECT s FROM Stock s WHERE s.pkStock = :pkStock"),
     @NamedQuery(name = "Stock.findByQuantidadeMinima", query = "SELECT s FROM Stock s WHERE s.quantidadeMinima = :quantidadeMinima"),
     @NamedQuery(name = "Stock.findByQuantidadeMaxima", query = "SELECT s FROM Stock s WHERE s.quantidadeMaxima = :quantidadeMaxima"),
-    @NamedQuery(name = "Stock.findByQuantidadeActual", query = "SELECT s FROM Stock s WHERE s.quantidadeActual = :quantidadeActual"),
-    @NamedQuery(name = "Stock.findByFkPortfolio", query = "SELECT s FROM Stock s WHERE s.fkPortfolio = :fkPortfolio")})
+    @NamedQuery(name = "Stock.findByQuantidadeActual", query = "SELECT s FROM Stock s WHERE s.quantidadeActual = :quantidadeActual")})
 public class Stock implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,8 +50,9 @@ public class Stock implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "quantidade_actual", length = 2147483647)
     private String quantidadeActual;
-    @Column(name = "fk_portfolio")
-    private Integer fkPortfolio;
+    @JoinColumn(name = "fk_portfolio", referencedColumnName = "pk_portfolio")
+    @ManyToOne
+    private Portfolio fkPortfolio;
 
     public Stock() {
     }
@@ -91,11 +93,11 @@ public class Stock implements Serializable {
         this.quantidadeActual = quantidadeActual;
     }
 
-    public Integer getFkPortfolio() {
+    public Portfolio getFkPortfolio() {
         return fkPortfolio;
     }
 
-    public void setFkPortfolio(Integer fkPortfolio) {
+    public void setFkPortfolio(Portfolio fkPortfolio) {
         this.fkPortfolio = fkPortfolio;
     }
 

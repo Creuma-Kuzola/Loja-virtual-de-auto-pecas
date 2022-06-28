@@ -8,6 +8,7 @@ package beans;
 import ejbs.entities.Portfolio;
 import ejbs.entities.Stock;
 import ejbs.facades.PortfolioFacade;
+import ejbs.facades.StockFacade;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -28,6 +29,8 @@ public class AdicionarProdutoStockBean implements Serializable {
      */
     @EJB
     private PortfolioFacade portfolioFacade;
+    @EJB
+    private StockFacade stockFacade;
     
     private Stock stock;
     private List<Portfolio> listaMarca;
@@ -49,6 +52,7 @@ public class AdicionarProdutoStockBean implements Serializable {
         listaCategoriaPeca = portfolioFacade.findAllCategoriasPecasByParent(listaModelo.get(0).getPkPortfolio());
         listaPeca = portfolioFacade.findAllPecasByParent(listaCategoriaPeca.get(0).getPkPortfolio());
         stock = new Stock();
+        
     }
 
     // Negócio
@@ -69,6 +73,13 @@ public class AdicionarProdutoStockBean implements Serializable {
     
     public void updatePeca(){
         listaPeca = portfolioFacade.findAllPecasByParent(categoriaPeca);
+        
+    }
+    
+  
+    public void salvarProdutos(){
+        stock.setFkPortfolio(new Portfolio(peca));
+        stockFacade.create(stock);
     }
     
     

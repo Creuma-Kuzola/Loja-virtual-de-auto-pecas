@@ -54,6 +54,8 @@ public class Portfolio implements Serializable {
     private Portfolio fkPortfolioPai;
     @OneToMany(mappedBy = "fkPortfolio")
     private List<CompraItem> compraItemList;
+    @OneToMany(mappedBy = "fkPortfolio")
+    private List<Stock> stockList;
 
     public Portfolio() {
     }
@@ -107,6 +109,15 @@ public class Portfolio implements Serializable {
 
     public void setCompraItemList(List<CompraItem> compraItemList) {
         this.compraItemList = compraItemList;
+    }
+
+    @XmlTransient
+    public List<Stock> getStockList() {
+        return stockList;
+    }
+
+    public void setStockList(List<Stock> stockList) {
+        this.stockList = stockList;
     }
 
     @Override

@@ -73,5 +73,9 @@ public class PortfolioFacade extends AbstractFacade<Portfolio> {
         query.setParameter("fkPortfolioPai", fkPortfolioPai);
         return query.getResultList();
     }
+    
+    
+    
+    
 
 }
