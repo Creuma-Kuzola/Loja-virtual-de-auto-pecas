@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <br/><br/><br/><br/>
+            <ui:define name="content">
+                <h1> Elimine produtos no stock</h1>
+                <p:dataTable id="dataTableStock" value="#{eliminarProdutoStockBean.listaStock}" var="stock">
+
+                    <f:facet name="header">
+                        <h:outputText value="Produtos da loja" />
+                    </f:facet>
+
+                    <p:column headerText="Id Stock" >
+                        <p:outputLabel value="#{stock.pkStock}" />
+                    </p:column>
+
+                    <p:column headerText="Id Produto" >
+                        <p:outputLabel value="#{stock.fkPortfolio.pkPortfolio}" />
+                    </p:column>
+
+                    <p:column headerText="Nome Produto" >
+                        <p:outputLabel value="#{stock.fkPortfolio.designacao}" />
+                    </p:column>
+
+                    <p:column headerText="Quantidade Actual" >
+                        <p:outputLabel value="#{stock.quantidadeActual}" />
+                    </p:column>
+
+                    <p:column headerText="Quantidade Mínima" >
+                        <p:outputLabel value="#{stock.quantidadeMinima}" />
+                    </p:column>
+
+                    <p:column headerText="Quantidade Máxima" >
+                        <p:outputLabel value="#{stock.quantidadeMaxima}" />
+                    </p:column>
+
+                    <p:column  headerText="Acção">
+                        <h:form>
+                            <p:commandButton value="Eliminar"  >
+                                <p:ajax 
+                                    listener="#{eliminarProdutoStockBean.removerProdutosDoStock(stock.pkStock)}"
+                                    update="dataTableStock"
+                                    />
+                            </p:commandButton>
+                        </h:form>
+                    </p:column>
+
+
+
+                </p:dataTable>    
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

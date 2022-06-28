@@ -31,7 +31,7 @@ public class AdicionarProdutoStockBean implements Serializable {
     private PortfolioFacade portfolioFacade;
     @EJB
     private StockFacade stockFacade;
-    
+
     private Stock stock;
     private List<Portfolio> listaMarca;
     private List<Portfolio> listaModelo;
@@ -44,47 +44,47 @@ public class AdicionarProdutoStockBean implements Serializable {
 
     public AdicionarProdutoStockBean() {
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         listaMarca = portfolioFacade.findAllMarcas();
         listaModelo = portfolioFacade.findAllModelosByParent(listaMarca.get(0).getPkPortfolio());
         listaCategoriaPeca = portfolioFacade.findAllCategoriasPecasByParent(listaModelo.get(0).getPkPortfolio());
         listaPeca = portfolioFacade.findAllPecasByParent(listaCategoriaPeca.get(0).getPkPortfolio());
         stock = new Stock();
-        
+
+        marca = listaMarca.get(0).getPkPortfolio();
+        modelo = listaModelo.get(0).getPkPortfolio();
+        categoriaPeca = listaCategoriaPeca.get(0).getPkPortfolio();
+        peca = listaPeca.get(0).getPkPortfolio();
     }
 
     // Negócio
-    
-    public void updateModelo(){
-        
-        listaModelo = portfolioFacade.findAllModelosByParent(marca); 
+    public void updateModelo() {
+
+        listaModelo = portfolioFacade.findAllModelosByParent(marca);
         modelo = listaModelo.get(0).getPkPortfolio();
         updateCategoriaPeca();
     }
-    
-    public void updateCategoriaPeca(){
-        
+
+    public void updateCategoriaPeca() {
+
         listaCategoriaPeca = portfolioFacade.findAllCategoriasPecasByParent(modelo);
         categoriaPeca = listaCategoriaPeca.get(0).getPkPortfolio();
         updatePeca();
     }
-    
-    public void updatePeca(){
+
+    public void updatePeca() {
         listaPeca = portfolioFacade.findAllPecasByParent(categoriaPeca);
-        
+
     }
-    
-  
-    public void salvarProdutos(){
+
+    public void salvarProdutos() {
         stock.setFkPortfolio(new Portfolio(peca));
         stockFacade.create(stock);
     }
-    
-    
+
     //getters and setters
-    
     public Stock getStock() {
         return stock;
     }
@@ -156,6 +156,5 @@ public class AdicionarProdutoStockBean implements Serializable {
     public void setPeca(String peca) {
         this.peca = peca;
     }
-    
 
 }

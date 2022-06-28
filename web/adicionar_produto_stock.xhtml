@@ -14,7 +14,7 @@
             <br/><br/><br/><br/>
             <ui:define name="content">
 
-                <h1> Adição de novos produtos no stock</h1>
+                <h1> Adicione novos produtos no stock</h1>
 
                 <h:form >
 
@@ -54,11 +54,11 @@
                                     itemLabel="#{categoriaPeca.designacao}" 
                                     itemValue="#{categoriaPeca.pkPortfolio}"
                                     />
-                                
+
                                 <p:ajax  listener="#{adicionarProdutoStockBean.updatePeca()}"
                                          update="pecaSelectOneMenu"
                                          />
-                                
+
                             </p:selectOneMenu>
 
                             <p:selectOneMenu id="pecaSelectOneMenu" value="#{adicionarProdutoStockBean.peca}">
@@ -82,12 +82,13 @@
                         <p:outputLabel value="Quantidade Actual" />
                         <p:inputText  value="#{adicionarProdutoStockBean.stock.quantidadeActual}"/>
 
-                        <p:panelGrid columns="3">
-                            <p:commandButton value="Cancelar" />
-                            <p:commandButton value="Editar"  action="login?faces-redirect=true" />
+                        <p:panelGrid columns="2">
+                            <p:commandButton value="Cancelar" action="home?faces-redirect=true" />
                             <p:commandButton value="Guardar" actionListener="#{adicionarProdutoStockBean.salvarProdutos()}" />
                         </p:panelGrid>
+                        
                     </p:panelGrid>
+                    
                 </h:form>
 
             </ui:define>
