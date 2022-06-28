@@ -27,6 +27,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/adicionar_produto_stock.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

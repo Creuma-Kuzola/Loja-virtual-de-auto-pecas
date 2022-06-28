@@ -49,9 +49,29 @@ public class PortfolioFacade extends AbstractFacade<Portfolio> {
         Query query = em.createQuery("SELECT p FROM Portfolio p WHERE p.pkPortfolio LIKE '_._._' ");
         return query.getResultList();
     }
-    
-    public List<Portfolio> findAllPecas(){
+
+    public List<Portfolio> findAllPecas() {
         Query query = em.createQuery("SELECT p FROM Portfolio p WHERE p.pkPortfolio LIKE '_._._._' ");
         return query.getResultList();
     }
+
+    public List<Portfolio> findAllModelosByParent(String fkPortfolioPai) {
+        Query query = em.createQuery("SELECT p from Portfolio p WHERE p.fkPortfolioPai.pkPortfolio = :fkPortfolioPai");
+        query.setParameter("fkPortfolioPai", fkPortfolioPai);
+        return query.getResultList();
+    }
+
+    public List<Portfolio> findAllCategoriasPecasByParent(String fkPortfolioPai) {
+        Query query = em.createQuery("SELECT p from Portfolio p WHERE p.fkPortfolioPai.pkPortfolio = :fkPortfolioPai");
+        query.setParameter("fkPortfolioPai", fkPortfolioPai);
+        return query.getResultList();
+    }
+    
+    public List<Portfolio> findAllPecasByParent(String fkPortfolioPai){
+    
+        Query query = em.createQuery("SELECT p FROM Portfolio p WHERE p.fkPortfolioPai.pkPortfolio = :fkPortfolioPai");
+        query.setParameter("fkPortfolioPai", fkPortfolioPai);
+        return query.getResultList();
+    }
+
 }
