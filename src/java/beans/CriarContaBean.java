@@ -12,6 +12,7 @@ import ejbs.entities.Sexo;
 import ejbs.entities.TipoConta;
 import ejbs.facades.ContaFacade;
 import ejbs.facades.LocalidadeFacade;
+import ejbs.facades.PessoaFacade;
 import ejbs.facades.SexoFacade;
 import ejbs.facades.TipoContaFacade;
 import java.io.Serializable;
@@ -34,42 +35,46 @@ public class CriarContaBean implements Serializable {
 
     @EJB
     private ContaFacade contaFacade;
-    
+
     @EJB
     private SexoFacade sexoFacade;
 
     @EJB
     private TipoContaFacade tipoContaFacade;
     
+    @EJB
+    private PessoaFacade pessoaFacade;
+
     private Localidade localidade;
     private Pessoa pessoa;
     private Conta conta;
     private Sexo sexo;
     private TipoConta tipoConta;
-    
+
     private List<Localidade> listaPaises;
     private List<Localidade> listaProvincias;
     private List<Localidade> listaMunicipios;
     private List<Localidade> listaDistritos;
     private List<Sexo> listaSexo;
     private List<TipoConta> listaTipoConta;
-    
+
     private String pais;
     private String provincia;
     private String municipio;
     private String distrito;
-    
-    @PostConstruct 
-    public void init(){
-        
+
+    @PostConstruct
+    public void init() {
+
         listOFSexos();
         listOfTipoConta();
-        
+
         sexo = new Sexo();
         pessoa = new Pessoa();
         conta = new Conta();
         localidade = new Localidade();
-        
+        tipoConta = new TipoConta();
+
         listaPaises = localidadeFacade.findAllPaises();
         listaProvincias = localidadeFacade.findAllProvinciasByParent(listaPaises.get(0).getPkLocalidade());
         listaMunicipios = localidadeFacade.findAllMunicipiosByParent(listaProvincias.get(0).getPkLocalidade());
@@ -79,7 +84,7 @@ public class CriarContaBean implements Serializable {
         provincia = listaProvincias.get(0).getPkLocalidade();
         municipio = listaMunicipios.get(0).getPkLocalidade();
         distrito = listaDistritos.get(0).getPkLocalidade();
-        
+
     }
 
     /**
@@ -87,47 +92,73 @@ public class CriarContaBean implements Serializable {
      */
     public CriarContaBean() {
     }
-    
-    
+
     //Negócio
-    
     public void listOFSexos() {
-        
-       listaSexo = sexoFacade.findAll();
-        
+
+        listaSexo = sexoFacade.findAll();
+
     }
-    
-    public void listOfTipoConta(){
+
+    public void listOfTipoConta() {
         listaTipoConta = tipoContaFacade.findAll();
     }
-    
-    
-    public void updateProvincias(){
-    
+
+    public void updateProvincias() {
+
         listaProvincias = localidadeFacade.findAllProvinciasByParent(pais);
         provincia = listaProvincias.get(0).getPkLocalidade();
         updateMunicipios();
-        
+
     }
-    
-    public void updateMunicipios(){
+
+    public void updateMunicipios() {
         listaMunicipios = localidadeFacade.findAllMunicipiosByParent(provincia);
         municipio = listaMunicipios.get(0).getPkLocalidade();
         updateDistritos();
-        
-    }
-    
-    public void updateDistritos(){
-    
-        listaDistritos = localidadeFacade.findAllDistritosByParent(municipio);
-        
-    }
-    
-    
-    
-    
-    //getters e setters
 
+    }
+
+    public void updateDistritos() {
+
+        listaDistritos = localidadeFacade.findAllDistritosByParent(municipio);
+
+    }
+    
+    public void salvarPessoa(){
+        
+        pessoa.setFkSexo(sexo);
+        pessoa.setFkLocalidade(new Localidade(distrito));
+        pessoaFacade.create(pessoa);
+        
+    }
+
+    public void salvarConta() {
+
+        salvarPessoa();
+        
+        pessoa = pessoaFacade.getPessoByEmail(pessoa.getEmail());
+        
+        System.out.println("Pessoa " + pessoa);
+        conta.setFkPessoa(pessoa);
+        conta.setFkTipoConta(tipoConta);
+        
+        
+        contaFacade.create(conta);
+        pessoa = new Pessoa();
+        conta = new Conta();
+        
+        /*System.out.println("Pais" + pais + " provincia " + provincia + " municipio "
+                + municipio + " distrito " + distrito);
+        System.out.println("Sexo" + sexo.getPkSexo());
+        System.out.println("nome" + pessoa.getNome() + "email" + pessoa.getEmail()
+                + "dtnasc " + pessoa.getDataNascimento());
+        System.out.println("tipo conta"+ tipoConta.getPkTipoConta());
+        System.out.println("Username "+ conta.getUsername() + "Password"+ conta.getPassword());*/
+
+    }
+
+    //getters e setters
     public Localidade getLocalidade() {
         return localidade;
     }
@@ -248,5 +279,4 @@ public class CriarContaBean implements Serializable {
         this.distrito = distrito;
     }
 
-    
 }

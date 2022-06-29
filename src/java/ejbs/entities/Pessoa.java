@@ -11,13 +11,18 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,38 +33,45 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author creuma
  */
 @Entity
-@Table(catalog = "ucandb", schema = "public")
+@Table(catalog = "ucandb", schema = "public", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"email"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pessoa.findAll", query = "SELECT p FROM Pessoa p"),
     @NamedQuery(name = "Pessoa.findByPkPessoa", query = "SELECT p FROM Pessoa p WHERE p.pkPessoa = :pkPessoa"),
-    @NamedQuery(name = "Pessoa.findByFkLocalidade", query = "SELECT p FROM Pessoa p WHERE p.fkLocalidade = :fkLocalidade"),
-    @NamedQuery(name = "Pessoa.findByDataNascimento", query = "SELECT p FROM Pessoa p WHERE p.dataNascimento = :dataNascimento"),
     @NamedQuery(name = "Pessoa.findByNome", query = "SELECT p FROM Pessoa p WHERE p.nome = :nome"),
-    @NamedQuery(name = "Pessoa.findByEmail", query = "SELECT p FROM Pessoa p WHERE p.email = :email")})
+    @NamedQuery(name = "Pessoa.findByEmail", query = "SELECT p FROM Pessoa p WHERE p.email = :email"),
+    @NamedQuery(name = "Pessoa.findByDataNascimento", query = "SELECT p FROM Pessoa p WHERE p.dataNascimento = :dataNascimento")})
 public class Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "pk_pessoa", nullable = false)
     private Integer pkPessoa;
-    @Size(max = 2147483647)
-    @Column(name = "fk_localidade", length = 2147483647)
-    private String fkLocalidade;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 2147483647)
+    @Column(nullable = false, length = 2147483647)
+    private String nome;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 2147483647)
+    @Column(nullable = false, length = 2147483647)
+    private String email;
     @Basic(optional = false)
     @NotNull
     @Column(name = "data_nascimento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-    @Size(max = 2147483647)
-    @Column(length = 2147483647)
-    private String nome;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 2147483647)
-    @Column(length = 2147483647)
-    private String email;
+    @JoinColumn(name = "fk_localidade", referencedColumnName = "pk_localidade")
+    @ManyToOne
+    private Localidade fkLocalidade;
+    @JoinColumn(name = "fk_sexo", referencedColumnName = "pk_sexo")
+    @ManyToOne
+    private Sexo fkSexo;
     @OneToMany(mappedBy = "fkPessoa")
     private List<Conta> contaList;
 
@@ -70,8 +82,10 @@ public class Pessoa implements Serializable {
         this.pkPessoa = pkPessoa;
     }
 
-    public Pessoa(Integer pkPessoa, Date dataNascimento) {
+    public Pessoa(Integer pkPessoa, String nome, String email, Date dataNascimento) {
         this.pkPessoa = pkPessoa;
+        this.nome = nome;
+        this.email = email;
         this.dataNascimento = dataNascimento;
     }
 
@@ -81,22 +95,6 @@ public class Pessoa implements Serializable {
 
     public void setPkPessoa(Integer pkPessoa) {
         this.pkPessoa = pkPessoa;
-    }
-
-    public String getFkLocalidade() {
-        return fkLocalidade;
-    }
-
-    public void setFkLocalidade(String fkLocalidade) {
-        this.fkLocalidade = fkLocalidade;
-    }
-
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
     }
 
     public String getNome() {
@@ -113,6 +111,30 @@ public class Pessoa implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Localidade getFkLocalidade() {
+        return fkLocalidade;
+    }
+
+    public void setFkLocalidade(Localidade fkLocalidade) {
+        this.fkLocalidade = fkLocalidade;
+    }
+
+    public Sexo getFkSexo() {
+        return fkSexo;
+    }
+
+    public void setFkSexo(Sexo fkSexo) {
+        this.fkSexo = fkSexo;
     }
 
     @XmlTransient

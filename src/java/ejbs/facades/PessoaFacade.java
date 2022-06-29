@@ -6,9 +6,11 @@
 package ejbs.facades;
 
 import ejbs.entities.Pessoa;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,20 @@ public class PessoaFacade extends AbstractFacade<Pessoa> {
 
     public PessoaFacade() {
         super(Pessoa.class);
+    }
+    
+    public Pessoa getPessoByEmail(String email){
+        
+        Query query = em.createQuery("SELECT p FROM Pessoa p WHERE p.email = :email");
+        query.setParameter("email", email );
+        
+        List<Pessoa> listObject = query.getResultList();
+        
+        if(listObject.isEmpty()){
+            return null;
+        }
+     
+        return listObject.get(0);
     }
     
 }

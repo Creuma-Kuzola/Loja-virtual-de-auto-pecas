@@ -23,14 +23,14 @@ and open the template in the editor.
                 <h1>Criar conta</h1>
                 <h:form>
                     <p:panelGrid columns="2">
-                        <p:outputLabel value="Nome" />
-                        <p:inputText required="true" />
+                        <p:outputLabel value="Nome"  />
+                        <p:inputText required="true" value="#{criarContaBean.pessoa.nome}" />
 
                         <p:outputLabel value="Email" />
-                        <p:inputText required="true" />
+                        <p:inputText required="true" value="#{criarContaBean.pessoa.email}" />
 
                         <p:outputLabel value="Data de Nascimento" />
-                        <p:calendar value=""/>
+                        <p:calendar value="#{criarContaBean.pessoa.dataNascimento}"/>
 
                         <p:outputLabel value="Sexo"  />
                         <p:selectOneMenu  value="#{criarContaBean.sexo.pkSexo}">
@@ -44,7 +44,7 @@ and open the template in the editor.
 
                         <p:outputLabel value="Endereço" />
 
-                        <p:panelGrid >
+                        <p:panelGrid columns="4" >
 
                             <p:selectOneMenu id="paisSelectOneMenu" value="#{criarContaBean.pais}">
                                 <f:selectItems 
@@ -98,13 +98,13 @@ and open the template in the editor.
                         </p:panelGrid> 
 
                         <p:outputLabel value="Username" />
-                        <p:inputText required="true" />
+                        <p:inputText required="true" value="#{criarContaBean.conta.username}" />
 
                         <p:outputLabel value="Password" />
-                        <p:inputText required="true" />
+                        <p:inputText required="true" value="#{criarContaBean.conta.password}" />
 
                         <p:outputLabel value="Tipo de conta" />
-                        <p:selectOneMenu  id="tipoContaSelectOneMenu" value="#{criarContaBean.conta.pkConta}">
+                        <p:selectOneMenu  id="tipoContaSelectOneMenu" value="#{criarContaBean.tipoConta.pkTipoConta}">
                             <f:selectItems 
                                 value="#{criarContaBean.listaTipoConta}"
                                 var="tipoConta"
@@ -112,6 +112,13 @@ and open the template in the editor.
                                 itemValue="#{tipoConta.pkTipoConta}"
                                 />
                         </p:selectOneMenu> 
+
+                        <p:panelGrid columns="2">
+                            <p:commandButton value="Cancelar" action="home?faces-redirect=true" />
+                            <p:commandButton value="Guardar" actionListener="#{criarContaBean.salvarConta()}" />
+                        </p:panelGrid>
+
+
 
                     </p:panelGrid>
 

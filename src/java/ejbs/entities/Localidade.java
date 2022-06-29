@@ -47,6 +47,8 @@ public class Localidade implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(nullable = false, length = 2147483647)
     private String nome;
+    @OneToMany(mappedBy = "fkLocalidade")
+    private List<Pessoa> pessoaList;
     @OneToMany(mappedBy = "fkLocalidadePai")
     private List<Localidade> localidadeList;
     @JoinColumn(name = "fk_localidade_pai", referencedColumnName = "pk_localidade")
@@ -79,6 +81,15 @@ public class Localidade implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @XmlTransient
+    public List<Pessoa> getPessoaList() {
+        return pessoaList;
+    }
+
+    public void setPessoaList(List<Pessoa> pessoaList) {
+        this.pessoaList = pessoaList;
     }
 
     @XmlTransient

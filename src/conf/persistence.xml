@@ -13,6 +13,7 @@
     <class>ejbs.entities.Montra</class>
     <class>ejbs.entities.TipoConta</class>
     <class>ejbs.entities.CompraItem</class>
+    <class>ejbs.entities.Teste</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <jta-data-source>java:/ucandb</jta-data-source>
   </persistence-unit>
