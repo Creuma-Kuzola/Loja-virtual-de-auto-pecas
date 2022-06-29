@@ -16,31 +16,116 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <h1>Criar conta</h1>
-        <h:form>
-            <p:panelGrid columns="2">
-                <p:outputLabel value="Nome" />
-                <p:inputText required="" />
 
-                <p:outputLabel value="Email" />
-                <p:inputText required="" />
+        <ui:composition template="./template.xhtml">
 
-                <p:outputLabel value="Data de Nascimento" />
-                <p:calendar value=""/>
+            <ui:define name="content">
+                <h1>Criar conta</h1>
+                <h:form>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nome" />
+                        <p:inputText required="true" />
 
-                <p:outputLabel value="Sexo" />
-                <p:selectOneRadio >
-                    <f:selectItem itemLabel="Masculino"  />
-                    <f:selectItem itemLabel="Femenino" />
-                </p:selectOneRadio>    
+                        <p:outputLabel value="Email" />
+                        <p:inputText required="true" />
+
+                        <p:outputLabel value="Data de Nascimento" />
+                        <p:calendar value=""/>
+
+                        <p:outputLabel value="Sexo"  />
+                        <p:selectOneMenu  value="#{criarContaBean.sexo.pkSexo}">
+                            <f:selectItems 
+                                value="#{criarContaBean.listaSexo}"
+                                var="sexo"
+                                itemLabel="#{sexo.nome}"
+                                itemValue="#{sexo.pkSexo}"
+                                />
+                        </p:selectOneMenu>    
+
+                        <p:outputLabel value="Endereço" />
+
+                        <p:panelGrid >
+
+                            <p:selectOneMenu id="paisSelectOneMenu" value="#{criarContaBean.pais}">
+                                <f:selectItems 
+                                    value="#{criarContaBean.listaPaises}" 
+                                    var="paises" 
+                                    itemLabel="#{paises.nome}" 
+                                    itemValue="#{paises.pkLocalidade}"
+                                    />
+                                <p:ajax 
+                                    listener="#{criarContaBean.updateProvincias()}"
+                                    update=" provinciaSelectOneMenu  municipioSelectOneMenu  distritoSelectOneMenu"
+                                    />
+                            </p:selectOneMenu>
+
+                            <p:selectOneMenu id="provinciaSelectOneMenu" value="#{criarContaBean.provincia}">
+                                <f:selectItems 
+                                    value="#{criarContaBean.listaProvincias}" 
+                                    var="provincias" 
+                                    itemLabel="#{provincias.nome}" 
+                                    itemValue="#{provincias.pkLocalidade}"
+                                    />
+                                <p:ajax 
+                                    listener="#{criarContaBean.updateMunicipios()}"
+                                    update="municipioSelectOneMenu  distritoSelectOneMenu"
+                                    />
+                            </p:selectOneMenu>
+
+                            <p:selectOneMenu id="municipioSelectOneMenu" value="#{criarContaBean.municipio}">
+                                <f:selectItems 
+                                    value="#{criarContaBean.listaMunicipios}" 
+                                    var="municipios" 
+                                    itemLabel="#{municipios.nome}" 
+                                    itemValue="#{municipios.pkLocalidade}"
+                                    />
+                                <p:ajax 
+                                    listener="#{criarContaBean.updateDistritos()}"
+                                    update="distritoSelectOneMenu"
+                                    />
+                            </p:selectOneMenu>
+
+                            <p:selectOneMenu id="distritoSelectOneMenu" value="#{criarContaBean.distrito}">
+                                <f:selectItems 
+                                    value="#{criarContaBean.listaDistritos}" 
+                                    var="distritos" 
+                                    itemLabel="#{distritos.nome}" 
+                                    itemValue="#{distritos.pkLocalidade}"
+                                    />
+
+                            </p:selectOneMenu>
+
+                        </p:panelGrid> 
+
+                        <p:outputLabel value="Username" />
+                        <p:inputText required="true" />
+
+                        <p:outputLabel value="Password" />
+                        <p:inputText required="true" />
+
+                        <p:outputLabel value="Tipo de conta" />
+                        <p:selectOneMenu  id="tipoContaSelectOneMenu" value="#{criarContaBean.conta.pkConta}">
+                            <f:selectItems 
+                                value="#{criarContaBean.listaTipoConta}"
+                                var="tipoConta"
+                                itemLabel="#{tipoConta.nome}"
+                                itemValue="#{tipoConta.pkTipoConta}"
+                                />
+                        </p:selectOneMenu> 
+
+                    </p:panelGrid>
 
 
+                </h:form>
 
-            </p:panelGrid>
-        </h:form>
+                <br/><p:outputLabel value="Já tem uma conta?  " >
+                    <h:link outcome="login.xhtml" value="Faça login!" />
+                </p:outputLabel> 
 
-        <br/><p:outputLabel value="Já tem uma conta?  " >
-            <h:link outcome="login.xhtml" value="Faça login!" />
-        </p:outputLabel> 
+            </ui:define>
+
+        </ui:composition>
+
     </h:body>
+
 </html>

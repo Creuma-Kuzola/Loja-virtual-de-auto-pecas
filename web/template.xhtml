@@ -13,6 +13,7 @@
     </h:head>
 
     <h:body>
+        
         <h:form>
 
             <div id="top" class="top">
@@ -20,8 +21,8 @@
                     <p:menubar>
                         <p:menuitem value="Home" action="home?faces-redirect=true" />
                         <p:submenu label="Conta" >
-                            <p:menuitem value="Nova" />
-                            <p:menuitem value="Editar" />
+                            <p:menuitem value="Nova" action="criar_conta.xhtml?faces-redirect=true" />
+                            <p:menuitem value="Editar" action="editar_conta?faces-redirect=true"/>
                         </p:submenu>
                         <p:submenu label="Montra" >
                             <p:menuitem value="Nova" />
