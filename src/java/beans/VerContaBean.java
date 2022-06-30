@@ -9,6 +9,7 @@ import ejbs.entities.Conta;
 import ejbs.facades.ContaFacade;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -31,9 +32,33 @@ public class VerContaBean implements Serializable {
     public VerContaBean() {
     }
     
-    public void listaDeContas(){
-        listaContas = contaFacade.findAll();
+    @PostConstruct
+    public void init(){
+    
+        listaContas = listaDeContas();
     }
+    
+    
+    
+    public List<Conta> listaDeContas(){
+        
+        return contaFacade.findAll();
+    }
+    
+    
+    
+    
+    public List<Conta> getListaContas() {
+        return listaContas;
+    }
+
+    public void setListaContas(List<Conta> listaContas) {
+        this.listaContas = listaContas;
+    }
+    
+    
+    
+    
     
     
     

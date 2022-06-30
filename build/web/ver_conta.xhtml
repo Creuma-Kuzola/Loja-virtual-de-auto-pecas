@@ -13,31 +13,32 @@
             <ui:define name="content">
                 <h1>Contas existentes no sistema</h1>
 
-                <p:dataTable id="dataTableConta">
+                <p:dataTable id="dataTableConta" value="#{verContaBean.listaContas}" var="contas">
 
                     <f:facet name="header">
                         <p:outputLabel value="Contas do sistema" />
                     </f:facet>
 
                     <p:column headerText="Id Conta" >
-                        <p:outputLabel value="" />
+                        <p:outputLabel value="#{contas.pkConta}" />
                     </p:column>
 
                     <p:column headerText="Username" >
-                        <p:outputLabel value="" />
+                        <p:outputLabel value="#{contas.username}" />
                     </p:column>
 
                     <p:column headerText="Tipo de Conta" >
-                        <p:outputLabel value="" />
+                        <p:outputLabel value="#{contas.fkTipoConta.nome}" />
+                    </p:column>
+                    
+                     <p:column headerText="Nome" >
+                         <p:outputLabel value="#{contas.fkPessoa.nome}" />
                     </p:column>
                    
                     <p:column  headerText="Acção">
                         <h:form>
                             <p:commandButton value="Ver mais"  >
-                                <p:ajax 
-                                    listener="#{eliminarProdutoStockBean.removerProdutosDoStock(stock.pkStock)}"
-                                    update="dataTableStock"
-                                    />
+
                             </p:commandButton>
                         </h:form>
                     </p:column>

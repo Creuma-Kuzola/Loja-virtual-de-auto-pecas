@@ -1,14 +1,48 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./template.xhtml">
 
+           
             <ui:define name="content">
-                content
+
+                 
+                <div style="display: flex; flex-wrap: wrap; margin: 1vw; padding:0.5vw; ">
+                    <ui:repeat value="#{montraBean.listaMontra}" var="produtosMontra">
+                        <div style="width: 25%">
+
+                            <h:form >
+
+                                <div style="border:0.2vw lightgray solid; padding:0.3vw; padding-left: 0.5vw;  text-align: center; border-radius:0.02vw;  margin-right:2vw; ">
+
+                                    <div style="color:#38B6FF; ">
+                                        <h3>#{produtosMontra.fkPortfolio.designacao}</h3>   
+                                    </div>
+
+                                    <p>#{produtosMontra.fkPortfolio.fkPortfolioPai.designacao}</p>
+                                    <p>#{produtosMontra.fkPortfolio.fkPortfolioPai.fkPortfolioPai.fkPortfolioPai.designacao} , #{produtosMontra.fkPortfolio.fkPortfolioPai.fkPortfolioPai.designacao}</p>
+
+                                    <p:commandButton
+                                        value="Adicionar ao Carrinho"
+                                        style="background-color:#38B6FF; color:#ffffff;border: none;  "
+                                        >
+                                    </p:commandButton>
+                                    <br/><br/>
+                                </div>
+                            </h:form>
+
+                        </div>
+
+                    </ui:repeat>
+
+                </div>    
+
             </ui:define>
 
         </ui:composition>

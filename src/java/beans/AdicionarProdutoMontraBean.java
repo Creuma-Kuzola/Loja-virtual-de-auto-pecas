@@ -58,7 +58,7 @@ public class AdicionarProdutoMontraBean implements Serializable {
         montra.setDataMontra(new Date());
         montra.setFkPortfolio(new Portfolio(pkPortfolio));
         montraFacade.create(montra);
-        
+       
     }
     
     public void removerProdutosMontra(int pkMontra){

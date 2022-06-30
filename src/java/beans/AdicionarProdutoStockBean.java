@@ -181,7 +181,7 @@ public class AdicionarProdutoStockBean implements Serializable {
     public void setPrecoActualProduto(double precoActualProduto) {
         this.precoActualProduto = precoActualProduto;
     }
-    
+     
     
 
     

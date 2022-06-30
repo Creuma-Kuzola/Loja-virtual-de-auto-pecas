@@ -19,20 +19,29 @@
             <div id="top" class="top">
                 <ui:insert name="top">
                     <p:menubar>
+                        
                         <p:menuitem value="Home" action="home?faces-redirect=true" />
+                        
                         <p:submenu label="Conta" >
+                            <p:menuitem value="Ver" action="ver_conta.xhtml?faces-redirect=true" />
                             <p:menuitem value="Nova" action="criar_conta.xhtml?faces-redirect=true" />
                             <p:menuitem value="Editar" action="editar_conta?faces-redirect=true"/>
                         </p:submenu>
+                        
                         <p:submenu label="Montra" >
-                            <p:menuitem value="Nova" action="adicionar_produto_montra.xhtml?faces-redirect=true" />
-                            <p:menuitem value="Eliminar" />
+                            <p:menuitem value="Ver" action="montra.xhtml?faces-redirect=true" />
+                            <p:menuitem value="Adicionar" action="adicionar_produto_montra.xhtml?faces-redirect=true" />
+                            <p:menuitem value="Eliminar" action="eliminar_montra.xhtml?faces-redirect=true" />
                         </p:submenu>
+                        
                         <p:submenu label="Stock" >
+                            <p:menuitem value="Ver" action="ver_stock.xhtml?faces-redirect=true" />
                             <p:menuitem value="Adicionar" action="adicionar_produto_stock.xhtml?faces-redirect=true" />
                             <p:menuitem value="Eliminar" action="eliminar_produto_stock.xhtml?faces-redirect=true"/>
                         </p:submenu>
+                        
                         <p:submenu label="Compra" >
+                            <p:menuitem value="Ver" action="montra.xhtml?faces-redirect=true" />
                             <p:menuitem value="Nova" />
                             <p:menuitem value="Editar" />
                         </p:submenu>
