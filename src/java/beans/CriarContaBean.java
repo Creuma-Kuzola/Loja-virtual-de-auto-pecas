@@ -148,14 +148,6 @@ public class CriarContaBean implements Serializable {
         pessoa = new Pessoa();
         conta = new Conta();
         
-        /*System.out.println("Pais" + pais + " provincia " + provincia + " municipio "
-                + municipio + " distrito " + distrito);
-        System.out.println("Sexo" + sexo.getPkSexo());
-        System.out.println("nome" + pessoa.getNome() + "email" + pessoa.getEmail()
-                + "dtnasc " + pessoa.getDataNascimento());
-        System.out.println("tipo conta"+ tipoConta.getPkTipoConta());
-        System.out.println("Username "+ conta.getUsername() + "Password"+ conta.getPassword());*/
-
     }
 
     //getters e setters

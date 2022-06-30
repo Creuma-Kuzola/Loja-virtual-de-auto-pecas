@@ -6,8 +6,8 @@
 package ejbs.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -73,7 +73,7 @@ public class Pessoa implements Serializable {
     @ManyToOne
     private Sexo fkSexo;
     @OneToMany(mappedBy = "fkPessoa")
-    private List<Conta> contaList;
+    private Collection<Conta> contaCollection;
 
     public Pessoa() {
     }
@@ -138,12 +138,12 @@ public class Pessoa implements Serializable {
     }
 
     @XmlTransient
-    public List<Conta> getContaList() {
-        return contaList;
+    public Collection<Conta> getContaCollection() {
+        return contaCollection;
     }
 
-    public void setContaList(List<Conta> contaList) {
-        this.contaList = contaList;
+    public void setContaCollection(Collection<Conta> contaCollection) {
+        this.contaCollection = contaCollection;
     }
 
     @Override

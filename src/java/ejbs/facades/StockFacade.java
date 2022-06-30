@@ -6,6 +6,7 @@
 package ejbs.facades;
 
 import ejbs.entities.Stock;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,6 +32,12 @@ public class StockFacade extends AbstractFacade<Stock> {
     }
     
    
+    public List<Stock> listaDeProdutosQueEstaoNoStockENaoNaMontra(){
+        
+        Query query = em.createQuery("SELECT s FROM Stock s WHERE s.fkPortfolio.pkPortfolio NOT IN (SELECT m.fkPortfolio.pkPortfolio FROM Montra m )");
+        return query.getResultList();
+        
+    } 
     
    
     

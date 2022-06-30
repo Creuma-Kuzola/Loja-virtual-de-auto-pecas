@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,7 +55,7 @@ public class Conta implements Serializable {
     @Column(nullable = false, length = 2147483647)
     private String password;
     @OneToMany(mappedBy = "fkConta")
-    private List<Compra> compraList;
+    private Collection<Compra> compraCollection;
     @JoinColumn(name = "fk_pessoa", referencedColumnName = "pk_pessoa")
     @ManyToOne
     private Pessoa fkPessoa;
@@ -101,12 +101,12 @@ public class Conta implements Serializable {
     }
 
     @XmlTransient
-    public List<Compra> getCompraList() {
-        return compraList;
+    public Collection<Compra> getCompraCollection() {
+        return compraCollection;
     }
 
-    public void setCompraList(List<Compra> compraList) {
-        this.compraList = compraList;
+    public void setCompraCollection(Collection<Compra> compraCollection) {
+        this.compraCollection = compraCollection;
     }
 
     public Pessoa getFkPessoa() {

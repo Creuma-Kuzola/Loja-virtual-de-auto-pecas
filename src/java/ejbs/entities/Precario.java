@@ -6,14 +6,16 @@
 package ejbs.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -34,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Precario.findAll", query = "SELECT p FROM Precario p"),
     @NamedQuery(name = "Precario.findByPkPrecario", query = "SELECT p FROM Precario p WHERE p.pkPrecario = :pkPrecario"),
     @NamedQuery(name = "Precario.findByDataPrecario", query = "SELECT p FROM Precario p WHERE p.dataPrecario = :dataPrecario"),
-    @NamedQuery(name = "Precario.findByFkPortfolio", query = "SELECT p FROM Precario p WHERE p.fkPortfolio = :fkPortfolio")})
+    @NamedQuery(name = "Precario.findByPreco", query = "SELECT p FROM Precario p WHERE p.preco = :preco")})
 public class Precario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,10 +48,14 @@ public class Precario implements Serializable {
     @Column(name = "data_precario")
     @Temporal(TemporalType.DATE)
     private Date dataPrecario;
-    @Column(name = "fk_portfolio")
-    private Integer fkPortfolio;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(precision = 17, scale = 17)
+    private Double preco;
+    @JoinColumn(name = "fk_portfolio", referencedColumnName = "pk_portfolio")
+    @ManyToOne
+    private Portfolio fkPortfolio;
     @OneToMany(mappedBy = "fkPrecario")
-    private List<CompraItem> compraItemList;
+    private Collection<CompraItem> compraItemCollection;
 
     public Precario() {
     }
@@ -74,21 +80,29 @@ public class Precario implements Serializable {
         this.dataPrecario = dataPrecario;
     }
 
-    public Integer getFkPortfolio() {
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public Portfolio getFkPortfolio() {
         return fkPortfolio;
     }
 
-    public void setFkPortfolio(Integer fkPortfolio) {
+    public void setFkPortfolio(Portfolio fkPortfolio) {
         this.fkPortfolio = fkPortfolio;
     }
 
     @XmlTransient
-    public List<CompraItem> getCompraItemList() {
-        return compraItemList;
+    public Collection<CompraItem> getCompraItemCollection() {
+        return compraItemCollection;
     }
 
-    public void setCompraItemList(List<CompraItem> compraItemList) {
-        this.compraItemList = compraItemList;
+    public void setCompraItemCollection(Collection<CompraItem> compraItemCollection) {
+        this.compraItemCollection = compraItemCollection;
     }
 
     @Override

@@ -6,9 +6,11 @@
 package ejbs.facades;
 
 import ejbs.entities.Precario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,23 @@ public class PrecarioFacade extends AbstractFacade<Precario> {
     public PrecarioFacade() {
         super(Precario.class);
     }
+    
+    public Precario getUltimoPrecoByPortfolio(String pkPortfolio){
+        
+        Query query = em.createQuery("SELECT p FROM Precario p WHERE p.fkPortfolio.pkPortfolio = :pkPortfolio ORDER BY p.dataPrecario DESC ");
+        query.setParameter("pkPortfolio", pkPortfolio);
+        
+        List<Precario> listaDePrecarios = query.getResultList();
+        
+        if(listaDePrecarios.isEmpty()){
+            
+            return null;
+            
+        }
+        
+        return listaDePrecarios.get(0);
+        
+    }
+    
     
 }

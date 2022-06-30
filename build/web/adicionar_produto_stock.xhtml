@@ -82,13 +82,20 @@
                         <p:outputLabel value="Quantidade Actual" />
                         <p:inputText  value="#{adicionarProdutoStockBean.stock.quantidadeActual}"/>
 
+                        <p:outputLabel value="Preço Actual" />
+                        <p:inputText value="#{adicionarProdutoStockBean.stock.quantidadeMaxima}"/>
+
+                        <p:outputLabel value="Preço Novo" />
+                        <p:inputText  value="#{adicionarProdutoStockBean.stock.quantidadeActual}"/>
+
+
                         <p:panelGrid columns="2">
                             <p:commandButton value="Cancelar" action="home?faces-redirect=true" />
                             <p:commandButton value="Guardar" actionListener="#{adicionarProdutoStockBean.salvarProdutos()}" />
                         </p:panelGrid>
-                        
+
                     </p:panelGrid>
-                    
+
                 </h:form>
 
             </ui:define>

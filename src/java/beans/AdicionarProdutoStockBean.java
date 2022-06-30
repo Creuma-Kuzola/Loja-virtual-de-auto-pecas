@@ -33,16 +33,22 @@ public class AdicionarProdutoStockBean implements Serializable {
     private StockFacade stockFacade;
 
     private Stock stock;
+    
     private List<Portfolio> listaMarca;
     private List<Portfolio> listaModelo;
     private List<Portfolio> listaCategoriaPeca;
     private List<Portfolio> listaPeca;
+    
     private String marca;
     private String modelo;
     private String categoriaPeca;
     private String peca;
+    
+    private double precoNovoProduto;
+    private double precoActualProduto;
 
     public AdicionarProdutoStockBean() {
+        
     }
 
     @PostConstruct
@@ -84,6 +90,9 @@ public class AdicionarProdutoStockBean implements Serializable {
         stockFacade.create(stock);
     }
 
+    
+    
+    
     //getters and setters
     public Stock getStock() {
         return stock;
@@ -157,4 +166,23 @@ public class AdicionarProdutoStockBean implements Serializable {
         this.peca = peca;
     }
 
+    public double getPrecoNovoProduto() {
+        return precoNovoProduto;
+    }
+
+    public void setPrecoNovoProduto(double precoNovoProduto) {
+        this.precoNovoProduto = precoNovoProduto;
+    }
+
+    public double getPrecoActualProduto() {
+        return precoActualProduto;
+    }
+
+    public void setPrecoActualProduto(double precoActualProduto) {
+        this.precoActualProduto = precoActualProduto;
+    }
+    
+    
+
+    
 }

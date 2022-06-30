@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h1>Contas existentes no sistema</h1>
+
+                <p:dataTable id="dataTableConta">
+
+                    <f:facet name="header">
+                        <p:outputLabel value="Contas do sistema" />
+                    </f:facet>
+
+                    <p:column headerText="Id Conta" >
+                        <p:outputLabel value="" />
+                    </p:column>
+
+                    <p:column headerText="Username" >
+                        <p:outputLabel value="" />
+                    </p:column>
+
+                    <p:column headerText="Tipo de Conta" >
+                        <p:outputLabel value="" />
+                    </p:column>
+                   
+                    <p:column  headerText="Acção">
+                        <h:form>
+                            <p:commandButton value="Ver mais"  >
+                                <p:ajax 
+                                    listener="#{eliminarProdutoStockBean.removerProdutosDoStock(stock.pkStock)}"
+                                    update="dataTableStock"
+                                    />
+                            </p:commandButton>
+                        </h:form>
+                    </p:column>
+
+                </p:dataTable>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

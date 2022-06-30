@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,8 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Montra.findAll", query = "SELECT m FROM Montra m"),
     @NamedQuery(name = "Montra.findByPkMontra", query = "SELECT m FROM Montra m WHERE m.pkMontra = :pkMontra"),
-    @NamedQuery(name = "Montra.findByDataMontra", query = "SELECT m FROM Montra m WHERE m.dataMontra = :dataMontra"),
-    @NamedQuery(name = "Montra.findByFkPortfolio", query = "SELECT m FROM Montra m WHERE m.fkPortfolio = :fkPortfolio")})
+    @NamedQuery(name = "Montra.findByDataMontra", query = "SELECT m FROM Montra m WHERE m.dataMontra = :dataMontra")})
 public class Montra implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,8 +44,9 @@ public class Montra implements Serializable {
     @Column(name = "data_montra")
     @Temporal(TemporalType.DATE)
     private Date dataMontra;
-    @Column(name = "fk_portfolio")
-    private Integer fkPortfolio;
+    @JoinColumn(name = "fk_portfolio", referencedColumnName = "pk_portfolio")
+    @ManyToOne
+    private Portfolio fkPortfolio;
 
     public Montra() {
     }
@@ -69,11 +71,11 @@ public class Montra implements Serializable {
         this.dataMontra = dataMontra;
     }
 
-    public Integer getFkPortfolio() {
+    public Portfolio getFkPortfolio() {
         return fkPortfolio;
     }
 
-    public void setFkPortfolio(Integer fkPortfolio) {
+    public void setFkPortfolio(Portfolio fkPortfolio) {
         this.fkPortfolio = fkPortfolio;
     }
 

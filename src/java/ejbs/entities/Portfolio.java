@@ -6,7 +6,7 @@
 package ejbs.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,15 +47,19 @@ public class Portfolio implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(nullable = false, length = 2147483647)
     private String designacao;
+    @OneToMany(mappedBy = "fkPortfolio")
+    private Collection<Precario> precarioCollection;
     @OneToMany(mappedBy = "fkPortfolioPai")
-    private List<Portfolio> portfolioList;
+    private Collection<Portfolio> portfolioCollection;
     @JoinColumn(name = "fk_portfolio_pai", referencedColumnName = "pk_portfolio")
     @ManyToOne
     private Portfolio fkPortfolioPai;
     @OneToMany(mappedBy = "fkPortfolio")
-    private List<CompraItem> compraItemList;
+    private Collection<Montra> montraCollection;
     @OneToMany(mappedBy = "fkPortfolio")
-    private List<Stock> stockList;
+    private Collection<CompraItem> compraItemCollection;
+    @OneToMany(mappedBy = "fkPortfolio")
+    private Collection<Stock> stockCollection;
 
     public Portfolio() {
     }
@@ -86,12 +90,21 @@ public class Portfolio implements Serializable {
     }
 
     @XmlTransient
-    public List<Portfolio> getPortfolioList() {
-        return portfolioList;
+    public Collection<Precario> getPrecarioCollection() {
+        return precarioCollection;
     }
 
-    public void setPortfolioList(List<Portfolio> portfolioList) {
-        this.portfolioList = portfolioList;
+    public void setPrecarioCollection(Collection<Precario> precarioCollection) {
+        this.precarioCollection = precarioCollection;
+    }
+
+    @XmlTransient
+    public Collection<Portfolio> getPortfolioCollection() {
+        return portfolioCollection;
+    }
+
+    public void setPortfolioCollection(Collection<Portfolio> portfolioCollection) {
+        this.portfolioCollection = portfolioCollection;
     }
 
     public Portfolio getFkPortfolioPai() {
@@ -103,21 +116,30 @@ public class Portfolio implements Serializable {
     }
 
     @XmlTransient
-    public List<CompraItem> getCompraItemList() {
-        return compraItemList;
+    public Collection<Montra> getMontraCollection() {
+        return montraCollection;
     }
 
-    public void setCompraItemList(List<CompraItem> compraItemList) {
-        this.compraItemList = compraItemList;
+    public void setMontraCollection(Collection<Montra> montraCollection) {
+        this.montraCollection = montraCollection;
     }
 
     @XmlTransient
-    public List<Stock> getStockList() {
-        return stockList;
+    public Collection<CompraItem> getCompraItemCollection() {
+        return compraItemCollection;
     }
 
-    public void setStockList(List<Stock> stockList) {
-        this.stockList = stockList;
+    public void setCompraItemCollection(Collection<CompraItem> compraItemCollection) {
+        this.compraItemCollection = compraItemCollection;
+    }
+
+    @XmlTransient
+    public Collection<Stock> getStockCollection() {
+        return stockCollection;
+    }
+
+    public void setStockCollection(Collection<Stock> stockCollection) {
+        this.stockCollection = stockCollection;
     }
 
     @Override
